@@ -1,0 +1,28 @@
+<h1 class="pt-3" align="center">Налаштування</h1>
+<div class="setting-form">
+  <%= form_for @settings, url: setting_path do |f| %>
+  <div class="row inform">
+    <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+      <p class="lable">Кількість моделей</p>
+    </div>
+    <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+      <%=f.text_field :model_count, class:"form-control", id:"formGroupExampleInput", required: true %>
+    </div>
+  </div>
+  <div class="row inform">
+    <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+      <p class="lable">Кількість ексериментів</p>
+    </div>
+    <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+      <%=f.text_field :experiment_count, class:"form-control", id:"formGroupExampleInput", required: true %>
+    </div>
+  </div>
+  <div class="row inform">
+    <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+    </div>
+    <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+     <%= f.submit "Зберегти", class: "btn btn-primary" %>
+   </div>
+  </div>
+<%end%>
+</div>
