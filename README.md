@@ -1,8 +1,9 @@
 Індивідуальна робота.
+https://docs.google.com/document/d/10PPFuR7W0K42qPWckhoeGcJeM17sBt4s/edit#
 
 Консольна версія проекту:
 
-# frozen_string_literal: true
+```ruby
 
 def second_step(s = 0.0, a = 0.0, b = 0.0)
   if a < s && s <= (a + b) / 2
@@ -123,8 +124,9 @@ model_for_third_step = [
     p: 9
   }
 ]
-
+```
 # second step
+```ruby
 second_step = model_for_second_step.each { |item| e.each { |e| item[:"#{e}"] = second_step(item[:"#{e}"], item[:a], item[:b]) } }
 
 third_step = model_for_third_step.each do |item|
@@ -134,8 +136,9 @@ end
 
 p 'third_step step'
 p third_step
-
+```
 # four step
+```ruby
 z = []
 
 third_step.each do |item|
@@ -150,8 +153,9 @@ end
 
 p 'four step'
 pp z
-
+```
 # five step
+```ruby
 
 w = []
 sum = model_for_third_step.inject(0) { |sum, item| sum + item[:p] }
@@ -161,9 +165,9 @@ end
 
 pp 'five step'
 pp w
-
+```
 # six step
-
+```ruby
 a = []
 n.times do |i|
   p i
@@ -173,8 +177,9 @@ end
 pp 'Six step'
 
 pp a
-
+```
 # seven step
+```ruby
 max = 0
 a.each_with_index do |item, index|
    index += 1
@@ -184,3 +189,5 @@ a.each_with_index do |item, index|
 end
 
 pp max
+
+```
