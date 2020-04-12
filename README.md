@@ -1,4 +1,5 @@
 Індивідуальна робота.
+https://docs.google.com/document/d/10PPFuR7W0K42qPWckhoeGcJeM17sBt4s/edit#
 
 Консольна версія проекту:
 
