@@ -135,15 +135,14 @@ class UploadController < ApplicationController
 
     # seven step
 
-    @max = 0
-    @winner = []
+    @list = {}
     @a.each_with_index do |item, index|
       index += 1
-      if item[:"e#{index}"] > @max
-      @max = item[:"e#{index}"]
-      @winner = item
+      @list[index] = {e: item[:"e#{index}"]}
     end
-    end
+    pp @list = @list.sort_by {|index,params|params[:e]}.reverse
+    @max = @list.first.second[:e]
+    @winer = @list.first.first
   end
 
   def upload

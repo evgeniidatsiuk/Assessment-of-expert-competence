@@ -38,9 +38,13 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 # front
 gem 'bootstrap', '~> 4.4.1'
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.3'
 
 gem "roo", "~> 2.8.0"
+
+gem 'simple_form'
+gem 'client_side_validations'
+gem 'client_side_validations-simple_form'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,0 +1,10 @@
+<%= simple_form_for model,url: models_path, validate: true do |f| %>
+<%=f.input :name, label: "Назва моделі"%>
+<div class="m-4">
+  <%=f.simple_fields_for :questions do |q_f|%>
+  <%= render "question_fields", f:q_f%>
+<%end%>
+<%# link_to_add_fields 'Add Question', f, :questions %>
+</div>
+<%=f.button :submit, "Save", class:"btn btn-success" %>
+<%end%>

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  get 'models/index'
-  get 'models/show'
+  resources :models ,only:[:new,:create,:show,:index]
   root 'upload#index'
   resources :upload do
     collection do

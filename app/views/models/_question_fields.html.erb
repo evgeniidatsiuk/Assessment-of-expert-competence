@@ -1,0 +1,10 @@
+<%= f.input :name, label: "Питання" %>
+<div class="m-4">
+
+<%= f.simple_fields_for :variants do |v_f|%>
+<%= render "variant_fields", f:v_f%>
+
+<%end%>
+<%= link_to_add_fields 'Add Question Variant', f, :variants %>
+</div>
+<%= f.input :_destroy, as: :boolean %>
