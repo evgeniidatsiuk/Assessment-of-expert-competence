@@ -1,0 +1,19 @@
+<div class="setting-form">
+  <%= form_for @user, url: pages_path do |f| %>
+  <div class="row inform">
+    <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+      <p class="lable">Введіть ПІБ</p>
+    </div>
+    <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+      <%= f.text_field :name, class:"form-control", id:"formGroupExampleInput", required: true %>
+    </div>
+  </div>
+  <div class="row inform">
+    <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+    </div>
+    <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+     <%= f.submit "Проойти тест", class: "btn btn-primary" %>
+   </div>
+  </div>
+<%end%>
+</div>

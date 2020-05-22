@@ -1,5 +1,9 @@
 module UploadHelper
   def second_step(s = 0.0, a = 0.0, b = 0.0)
+     p "s", s
+    if s <= a
+      return second_step(s+1, a, b)
+    end
     if a < s && s <= (a + b) / 2
       one = (s - a).to_f
       two = (b - a).to_f
@@ -7,11 +11,23 @@ module UploadHelper
       final **= 2
       return 2 * final
     end
-    0
+
+    if (a + b) / 2 < s && s < b
+      one = (b - s).to_f
+      two = (b - a).to_f
+      final = (one / two).to_f
+      final **= 2
+      return 1 - 2 * final
+    end
+
+    1 if s >= b
   end
 
   def third_step(t = 0.0, a = 0.0, b = 0.0)
-    return 0 if t <= a
+ p "t", t
+ if t <= a
+   return third_step(t+1, a, b)
+ end
 
     if a < t && t <= (a + b) / 2
       one = (t - a).to_f

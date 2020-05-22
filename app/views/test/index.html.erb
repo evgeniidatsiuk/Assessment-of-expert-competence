@@ -1,0 +1,14 @@
+<%= form_for :test , url: calculate_test_index_path do |f| %>
+  <% @models.each_with_index do |m,m_i| %>
+  <hr>
+  <%= m.name %>
+  <hr>
+  <br>
+    <% m.questions.each_with_index do |q,i| %>
+    <br>
+      <%= f.select :"model[#{m_i+1}][question[#{i+1}]", options_for_select(q.variants.collect{ |u| [u.name, u.value] }) %>
+    <%end %>
+  <%end %>
+  <br>
+<%= f.submit %>
+<% end %>

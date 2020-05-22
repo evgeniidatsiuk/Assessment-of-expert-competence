@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
+  root 'pages#index'
   resources :models ,only:[:new,:create,:show,:index]
-  root 'upload#index'
+  resources :test, only:[:index] do
+    collection do
+      get :result
+      post :calculate
+    end
+  end
+  resources :pages, only: [:create]
   resources :upload do
     collection do
       post :upload

@@ -13,7 +13,7 @@ class ModelsController < ApplicationController
     count = params[:count].to_i
     count = 2 if count == 0
     count.times do
-    @questions <<  @model.questions.build()
+    @questions << @model.questions.build()
     @questions.last.variants.build()
     end
 

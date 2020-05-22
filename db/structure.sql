@@ -32,6 +32,10 @@ CREATE TABLE public.ar_internal_metadata (
 CREATE TABLE public.models (
     id bigint NOT NULL,
     name character varying,
+    a integer,
+    b integer,
+    t integer,
+    p integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -130,6 +134,38 @@ ALTER SEQUENCE public.settings_id_seq OWNED BY public.settings.id;
 
 
 --
+-- Name: users; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.users (
+    id bigint NOT NULL,
+    name character varying,
+    result text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
 -- Name: variants; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -184,6 +220,13 @@ ALTER TABLE ONLY public.settings ALTER COLUMN id SET DEFAULT nextval('public.set
 
 
 --
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
 -- Name: variants id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -231,6 +274,14 @@ ALTER TABLE ONLY public.settings
 
 
 --
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: variants variants_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -248,6 +299,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200412155143'),
 ('20200513174213'),
 ('20200513174347'),
-('20200513174432');
+('20200513174432'),
+('20200517082140');
 
 

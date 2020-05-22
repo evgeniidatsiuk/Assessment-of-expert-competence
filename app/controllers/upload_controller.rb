@@ -46,7 +46,10 @@ class UploadController < ApplicationController
         p: 9
       }
     ]
+    @test = []
 
+    @users = User.all
+    
     @model_for_third_step = [
       {
         e1: 70,
