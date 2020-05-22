@@ -6,7 +6,7 @@ class CreateModels < ActiveRecord::Migration[5.2]
       t.integer :b
       t.integer :t
       t.integer :p
-
+      
       t.timestamps
     end
   end

@@ -2,7 +2,7 @@ class CreateVariants < ActiveRecord::Migration[5.2]
   def change
     create_table :variants do |t|
       t.integer :question_id
-      t.string :name
+      t.string :title
       t.integer :value
 
       t.timestamps

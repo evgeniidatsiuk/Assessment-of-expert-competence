@@ -67,7 +67,8 @@ ALTER SEQUENCE public.models_id_seq OWNED BY public.models.id;
 CREATE TABLE public.questions (
     id bigint NOT NULL,
     model_id integer,
-    name character varying,
+    title character varying,
+    type integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -172,7 +173,7 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 CREATE TABLE public.variants (
     id bigint NOT NULL,
     question_id integer,
-    name character varying,
+    title character varying,
     value integer,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -297,9 +298,9 @@ SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
 ('20200412155143'),
-('20200513174213'),
-('20200513174347'),
-('20200513174432'),
-('20200517082140');
+('20200419171031'),
+('20200419171127'),
+('20200419183144'),
+('20200420171529');
 
 

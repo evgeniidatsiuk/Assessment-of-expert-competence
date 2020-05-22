@@ -6,7 +6,14 @@
   <br>
     <% m.questions.each_with_index do |q,i| %>
     <br>
-      <%= f.select :"model[#{m_i+1}][question[#{i+1}]", options_for_select(q.variants.collect{ |u| [u.name, u.value] }) %>
+    <div class="row inform">
+      <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+        <p class="lable"><%= q.title %></p>
+      </div>
+      <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+        <%= f.select :"model[#{m_i+1}][question[#{i+1}]", options_for_select(q.variants.collect{ |u| [u.title, u.value] }) %>
+      </div>
+      </div>
     <%end %>
   <%end %>
   <br>

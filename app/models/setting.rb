@@ -1,3 +1,3 @@
 class Setting < ApplicationRecord
-    validates  :model_count, :experiment_count, presence: true
+  validates_presence_of :model_count, :experiment_count
 end

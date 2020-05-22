@@ -1,4 +1,4 @@
 class Variant < ApplicationRecord
   belongs_to :question
-  validates :name, :value, presence: true
+  validates_presence_of :title, :value
 end
