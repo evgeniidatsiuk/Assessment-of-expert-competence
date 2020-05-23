@@ -45,7 +45,7 @@ class UploadController < ApplicationController
     @model_for_third_step = model2
     pp @model_for_third_step
 
-    @second_step = @model_for_second_step.each { |item| e.each { |e| item[:"#{e}"] = third_step(item[:"#{e}"], item[:a], item[:b])  } }
+  #  @second_step = @model_for_second_step.each { |item| e.each { |e| pp third_step(item[:"#{e}"], item[:a], item[:b])  } }
 
     @third_step = @model_for_third_step.each do |item|
       e.each { |e| item[:"#{e}"] = third_step(item[:"#{e}"], item[:a], item[:b]) }
