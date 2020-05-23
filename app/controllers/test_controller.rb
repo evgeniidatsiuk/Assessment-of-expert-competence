@@ -19,7 +19,7 @@ class TestController < ApplicationController
       x[1][:question].each do |s|
         res.push(s[1].to_i)
       end
-      pp "SS", res
+
       f[:e] = res.sum
       f[:a] = model.a
       f[:b] = model.b
@@ -27,20 +27,19 @@ class TestController < ApplicationController
       f[:p] = model.p
       models << f
     end
-    #current_user.update_attributes(result: models.to_a)
+
     session[:models] = []
     session[:models] = models
 
-    pp models
     current_user.update_attributes(result: models)
-
+    pp current_user
 
     redirect_to result_test_index_path
   end
 
   def result
     models = session[:models]
-    #pp "sss"
+    pp "sss"
     pp models
     n = models.size
 
@@ -58,18 +57,18 @@ class TestController < ApplicationController
 
     # second step
 
-    @second_step = @model_for_second_step.each { |item| pp  "AAAA" ,item['e'] }
+    @second_step = @model_for_second_step.each { |item| item['e'] = second_step(item['e'], item['a'], item['b']) }
 
-  #  p '@second_step step'
-  #  p @second_step
+    p '@second_step step'
+    p @second_step
 
     @third_step = @model_for_third_step.each do |item|
       item['e'] = third_step(item['e'], item['a'], item['b'])
       item['d'] = third_step(item['t'], item['a'], item['b'])
     end
 
-  #  p '@third_step step'
-  #  p @third_step
+    p '@third_step step'
+    p @third_step
 
     # four step
 
@@ -83,8 +82,8 @@ class TestController < ApplicationController
       @z << array
     end
 
-  #  p 'four step'
-  #  pp @z
+    p 'four step'
+    pp @z
 
     # five step
 
@@ -94,37 +93,13 @@ class TestController < ApplicationController
       @w << item['p'] / sum.to_f
     end
 
-  #  pp 'five step'
-  #  pp @w
-    # six step
-    # @a = []
+    pp 'five step'
+    pp @w
     sum = 0
     n.times do |i|
-      p i
       sum += @z[i][0] * @w[0]
-      # @a << { "e#{i + 1}": @z[0][i] * @w[0] + @z[1][i] * @w[1] + @z[2][i] * @w[2] }
     end
-    # @a <<
 
-    # @a = []
-    # n.times do |i|
-    #   p i
-    #   @a << { "e#{i + 1}": @z[0][i] * @w[0] + @z[1][i] * @w[1] + @z[2][i] * @w[2] }
-    # end
-
-
-    # pp 'Six step'
-    #
-    # pp @a
-
-    # seven step
-
-    # @list = {}
-    # @a.each_with_index do |item, index|
-    #   index += 1
-    #   @list[index] = {e: item[:"e#{index}"]}
-    # end
-    # pp @list = @list.sort_by {|index,params|params['e']}.reverse
     @max = sum
     @winer = 'You'
    end
