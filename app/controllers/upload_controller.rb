@@ -14,27 +14,38 @@ class UploadController < ApplicationController
     model1 = []
     model2 = []
 
-     @users.each do |x|
-       pp "x #{x}"
-       hash = {}
-       x.each_with_index do |u,i|
-          pp "u #{u} i #{i}"
-         hash[:"e#{i+1}"] = u[:e]
-         hash[:a] = u[:a]
-         hash[:b] = u[:b]
-         hash[:t] = u[:t]
-         hash[:p] = u[:p]
-       end
-       pp "Go #{hash}"
-      model1 << hash
-      model2 << hash
+    [[{:e=>55, :a=>55, :b=>120, :t=>100, :p=>6},
+      {:e=>60, :a=>60, :b=>220, :t=>190, :p=>10},
+      {:e=>20, :a=>20, :b=>180, :t=>140, :p=>9}],
+     [{:e=>55, :a=>55, :b=>120, :t=>100, :p=>6},
+      {:e=>60, :a=>60, :b=>220, :t=>190, :p=>10},
+      {:e=>20, :a=>20, :b=>180, :t=>140, :p=>9}],
+     [{:e=>55, :a=>55, :b=>120, :t=>100, :p=>6},
+      {:e=>60, :a=>60, :b=>220, :t=>190, :p=>10},
+      {:e=>20, :a=>20, :b=>180, :t=>140, :p=>9}],
+     [{:e=>55, :a=>55, :b=>120, :t=>100, :p=>6},
+      {:e=>60, :a=>60, :b=>220, :t=>190, :p=>10},
+      {:e=>20, :a=>20, :b=>180, :t=>140, :p=>9}]]
+      models.times do |g|
+        hash = {}
+       @users.each_with_index do |x,i|
+         pp "x #{x}"
+
+           hash[:"e#{i+1}"] = x[g][:e]
+           hash[:a] = x[g][:a]
+           hash[:b] = x[g][:b]
+           hash[:t] = x[g][:t]
+           hash[:p] = x[g][:p]
+         end
+         model1 << hash
+         model2 << hash
      end
 
     @model_for_second_step = model1
     @model_for_third_step = model2
     pp @model_for_third_step
 
-    @second_step = @model_for_second_step.each { |item| e.each { |e| pp e, item[:"#{e}"] } }
+    @second_step = @model_for_second_step.each { |item| e.each { |e| item[:"#{e}"] = third_step(item[:"#{e}"], item[:a], item[:b])  } }
 
     @third_step = @model_for_third_step.each do |item|
       e.each { |e| item[:"#{e}"] = third_step(item[:"#{e}"], item[:a], item[:b]) }
@@ -75,7 +86,7 @@ class UploadController < ApplicationController
     @a = []
       sum = 0
       @n.times do |i|
-        @n.times do |j|
+        models.times do |j|
           pp "i#{i} j #{j}"
           sum += @z[j][i] * @w[j]
           pp "SSS", sum
@@ -108,7 +119,7 @@ class UploadController < ApplicationController
 
   private
   def check
-    @users = where("result != '{}'").map(&:result)
+    @users = User.where("result != '{}'").map(&:result)
     @n = Setting.first.experiment_count
     if @n != @users.count
       flash[:error] = "В налаштування: #{@n}, а пройшло тест: #{@users.count}."
