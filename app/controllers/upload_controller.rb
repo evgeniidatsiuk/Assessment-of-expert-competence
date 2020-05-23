@@ -7,7 +7,7 @@ class UploadController < ApplicationController
   def index
     e = []
     models = Setting.first.model_count
-    (1..n).each do |i|
+    (1..@n).each do |i|
       e << "e#{i}"
     end
 
@@ -15,21 +15,23 @@ class UploadController < ApplicationController
     model2 = []
 
      @users.each do |x|
+       pp "x #{x}"
        hash = {}
        x.each_with_index do |u,i|
+          pp "u #{u} i #{i}"
          hash[:"e#{i+1}"] = u[:e]
          hash[:a] = u[:a]
          hash[:b] = u[:b]
          hash[:t] = u[:t]
          hash[:p] = u[:p]
        end
+       pp "Go #{hash}"
       model1 << hash
       model2 << hash
      end
 
     @model_for_second_step = model1
     @model_for_third_step = model2
-    pp @model_for_second_step
     pp @model_for_third_step
 
     @second_step = @model_for_second_step.each { |item| e.each { |e| pp e, item[:"#{e}"] } }
@@ -69,11 +71,11 @@ class UploadController < ApplicationController
 
     pp 'five step'
     pp @w
-    # six step
+
     @a = []
       sum = 0
-      n.times do |i|
-        n.times do |j|
+      @n.times do |i|
+        @n.times do |j|
           pp "i#{i} j #{j}"
           sum += @z[j][i] * @w[j]
           pp "SSS", sum
@@ -107,9 +109,9 @@ class UploadController < ApplicationController
   private
   def check
     @users = User.where('result IS not NULL').map(&:result)
-    n = Setting.first.experiment_count
-    if n != @users.count
-      flash[:error] = "В налаштування: #{n}, а пройшло тест: #{@users.count}."
+    @n = Setting.first.experiment_count
+    if @n != @users.count
+      flash[:error] = "В налаштування: #{@n}, а пройшло тест: #{@users.count}."
       redirect_to setting_path
     end
   end
