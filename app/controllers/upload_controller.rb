@@ -108,7 +108,7 @@ class UploadController < ApplicationController
 
   private
   def check
-    @users = User.where('result IS not NULL').map(&:result)
+    @users = where("result != '{}'").map(&:result)
     @n = Setting.first.experiment_count
     if @n != @users.count
       flash[:error] = "В налаштування: #{@n}, а пройшло тест: #{@users.count}."
