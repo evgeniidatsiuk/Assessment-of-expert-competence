@@ -11,18 +11,16 @@
       <a class="nav-item nav-link active" href="/models">Список моделей</a>
     </div>
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="/models/new">Додати нову модель</a>
-    </div>
-    <div class="navbar-nav">
       <a class="nav-item nav-link active" href="/upload">Завантажити приклад</a>
     </div>
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="/upload">Результати</a>
+      <a class="nav-item nav-link active" href="/test/upload">Результати</a>
     </div>
-    <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="/test/result">Ваш результат</a>
-    </div>
-    <%= link_to "+", new_model_path %>
+    <% if current_user %>
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="/test/result">Ваш результат (<%= current_user.name %>)</a>
+      </div>
+    <% end %>
   </div>
 
 </nav>

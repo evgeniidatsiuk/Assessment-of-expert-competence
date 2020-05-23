@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     collection do
       get :result
       post :calculate
+      get :upload
     end
   end
   resources :pages, only: [:create]

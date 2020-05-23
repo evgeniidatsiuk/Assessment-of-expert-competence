@@ -31,4 +31,8 @@ module ApplicationHelper
 
     content_tag(:a, name, html_options, &block)
   end
+
+  def current_user
+    User.find_by_id cookies[:current_user]
+  end
 end
