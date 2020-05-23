@@ -12,18 +12,19 @@ class TestController < ApplicationController
     result = []
     ogo.each do |x|
       pp x[0] # we can find model by id
+      model = Model.find_by_id x[0]
       f = {}
       res = []
 
       x[1][:question].each do |s|
         res.push(s[1].to_i)
       end
-
-      f['e'] = res.sum + 100
-      f[:a] = rand(50)
-      f[:b] = rand(10) + 35
-      f[:t] = rand(200)
-      f['p'] = rand(200)
+      pp "SS", res
+      f[:e] = res.sum
+      f[:a] = model.a
+      f[:b] = model.b
+      f[:t] = model.t
+      f[:p] = model.p
       models << f
     end
     #current_user.update_attributes(result: models.to_a)
@@ -39,7 +40,7 @@ class TestController < ApplicationController
 
   def result
     models = session[:models]
-    pp "sss"
+    #pp "sss"
     pp models
     n = models.size
 
@@ -57,18 +58,18 @@ class TestController < ApplicationController
 
     # second step
 
-    @second_step = @model_for_second_step.each { |item| item['e'] = second_step(item['e'], item['a'], item['b']) }
+    @second_step = @model_for_second_step.each { |item| pp  "AAAA" ,item['e'] }
 
-    p '@second_step step'
-    p @second_step
+  #  p '@second_step step'
+  #  p @second_step
 
     @third_step = @model_for_third_step.each do |item|
       item['e'] = third_step(item['e'], item['a'], item['b'])
       item['d'] = third_step(item['t'], item['a'], item['b'])
     end
 
-    p '@third_step step'
-    p @third_step
+  #  p '@third_step step'
+  #  p @third_step
 
     # four step
 
@@ -82,8 +83,8 @@ class TestController < ApplicationController
       @z << array
     end
 
-    p 'four step'
-    pp @z
+  #  p 'four step'
+  #  pp @z
 
     # five step
 
@@ -93,8 +94,8 @@ class TestController < ApplicationController
       @w << item['p'] / sum.to_f
     end
 
-    pp 'five step'
-    pp @w
+  #  pp 'five step'
+  #  pp @w
     # six step
     # @a = []
     sum = 0

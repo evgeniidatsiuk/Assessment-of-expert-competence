@@ -1,6 +1,6 @@
 <div class="">
-  <%= select_tag :questions, options_for_select((1..10).to_a)%>
+  <%= select_tag :questions, options_for_select((1..15).to_a)%>
 </div>
 <div id="form">
-<%=render "form", model: @model%>
+  <%=render "form", model: @model%>
 </div>

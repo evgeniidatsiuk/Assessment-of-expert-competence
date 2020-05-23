@@ -1,5 +1,9 @@
 <%= simple_form_for model,url: models_path, validate: true do |f| %>
 <%=f.input :name, label: "Назва моделі"%>
+<%=f.input :a, label: "A"%>
+<%=f.input :b, label: "B"%>
+<%=f.input :t, label: "T"%>
+<%=f.input :p, label: "P"%>
 <div class="m-4">
   <%=f.simple_fields_for :questions do |q_f|%>
   <%= render "question_fields", f:q_f%>

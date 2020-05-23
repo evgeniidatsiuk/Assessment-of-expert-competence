@@ -4,91 +4,121 @@ class UploadController < ApplicationController
   include UploadHelper
 
   def index
-    n = 5
+    @users = User.where('result IS not NULL').map(&:result)
+    n = @users.count
     e = []
     models = 3
     (1..n).each do |i|
       e << "e#{i}"
     end
 
-    @model_for_second_step = [
-      {
-        e1: 70,
-        e2: 90,
-        e3: 110,
-        e4: 85,
-        e5: 115,
-        a: 55,
-        b: 120,
-        t: 100,
-        p: 6
-      },
-      {
-        e1: 200,
-        e2: 110,
-        e3: 180,
-        e4: 200,
-        e5: 150,
-        a: 60,
-        b: 220,
-        t: 190,
-        p: 10
-      },
-      {
-        e1: 90,
-        e2: 120,
-        e3: 150,
-        e4: 80,
-        e5: 170,
-        a: 20,
-        b: 180,
-        t: 140,
-        p: 9
-      }
-    ]
+    model1 = []
+    model2 = []
+    model = [
+      [{:e=>115, :a=>55, :b=>120, :t=>100, :p=>6},
+       {:e=>185, :a=>60, :b=>220, :t=>190, :p=>10},
+       {:e=>180, :a=>20, :b=>180, :t=>140, :p=>9}],
+      [{:e=>120, :a=>55, :b=>120, :t=>100, :p=>6},
+       {:e=>150, :a=>60, :b=>220, :t=>190, :p=>10},
+       {:e=>110, :a=>20, :b=>180, :t=>140, :p=>9}],
+      [{:e=>80,  :a=>55, :b=>120, :t=>100, :p=>6},
+       {:e=>115, :a=>60, :b=>220, :t=>190, :p=>10},
+       {:e=>92,  :a=>20, :b=>180, :t=>140, :p=>9}]
+     ]
+
+     @users.each do |x|
+       hash = {}
+       x.each_with_index do |u,i|
+         hash[:"e#{i+1}"] = u[:e]
+         hash[:a] = u[:a]
+         hash[:b] = u[:b]
+         hash[:t] = u[:t]
+         hash[:p] = u[:p]
+       end
+      model1 << hash
+      model2 << hash
+     end
+
+    @model_for_second_step = model1
+    # [
+    #   {
+    #     e1: 70,
+    #     e2: 90,
+    #     e3: 110,
+    #     e4: 85,
+    #     e5: 115,
+    #     a: 55,
+    #     b: 120,
+    #     t: 100,
+    #     p: 6
+    #   },
+    #   {
+    #     e1: 200,
+    #     e2: 110,
+    #     e3: 180,
+    #     e4: 200,
+    #     e5: 150,
+    #     a: 60,
+    #     b: 220,
+    #     t: 190,
+    #     p: 10
+    #   },
+    #   {
+    #     e1: 90,
+    #     e2: 120,
+    #     e3: 150,
+    #     e4: 80,
+    #     e5: 170,
+    #     a: 20,
+    #     b: 180,
+    #     t: 140,
+    #     p: 9
+    #   }
+    # ]
     @test = []
 
     @users = User.all
-    
-    @model_for_third_step = [
-      {
-        e1: 70,
-        e2: 90,
-        e3: 110,
-        e4: 85,
-        e5: 115,
-        a: 55,
-        b: 120,
-        t: 100,
-        p: 6
-      },
-      {
-        e1: 200,
-        e2: 110,
-        e3: 180,
-        e4: 200,
-        e5: 150,
-        a: 60,
-        b: 220,
-        t: 190,
-        p: 10
-      },
-      {
-        e1: 90,
-        e2: 120,
-        e3: 150,
-        e4: 80,
-        e5: 170,
-        a: 20,
-        b: 180,
-        t: 140,
-        p: 9
-      }
-    ]
+
+    @model_for_third_step = model2
+    # [
+    #   {
+    #     e1: 70,
+    #     e2: 90,
+    #     e3: 110,
+    #     e4: 85,
+    #     e5: 115,
+    #     a: 55,
+    #     b: 120,
+    #     t: 100,
+    #     p: 6
+    #   },
+    #   {
+    #     e1: 200,
+    #     e2: 110,
+    #     e3: 180,
+    #     e4: 200,
+    #     e5: 150,
+    #     a: 60,
+    #     b: 220,
+    #     t: 190,
+    #     p: 10
+    #   },
+    #   {
+    #     e1: 90,
+    #     e2: 120,
+    #     e3: 150,
+    #     e4: 80,
+    #     e5: 170,
+    #     a: 20,
+    #     b: 180,
+    #     t: 140,
+    #     p: 9
+    #   }
+    # ]
 
     # second step
 
-    @second_step = @model_for_second_step.each { |item| e.each { |e| item[:"#{e}"] = second_step(item[:"#{e}"], item[:a], item[:b]) } }
+    @second_step = @model_for_second_step.each { |item| e.each { |e| pp "salam" , second_step(item[:"#{e}"], item[:a], item[:b]) } }
 
     @third_step = @model_for_third_step.each do |item|
       e.each { |e| item[:"#{e}"] = third_step(item[:"#{e}"], item[:a], item[:b]) }

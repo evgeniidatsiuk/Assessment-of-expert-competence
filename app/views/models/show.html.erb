@@ -1,2 +1,11 @@
-<h1>Models#show</h1>
-<p>Find me in app/views/models/show.html.erb</p>
+<% @model.questions.each_with_index do |q,i| %>
+<br>
+<div class="row inform">
+  <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+    <p class="lable"><%= q.title %></p>
+  </div>
+  <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+    <%= select_tag :"[question[#{i+1}]", options_for_select(q.variants.collect{ |u| [u.title, u.value] }) %>
+  </div>
+</div>
+<% end %>
