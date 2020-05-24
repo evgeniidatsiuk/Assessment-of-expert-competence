@@ -8,7 +8,7 @@ module UploadHelper
       two = (b - a).to_f
       final = (one / two).to_f
       final **= 2
-      return 2 * final
+      return (2 * final).floor(3)
     end
 
     if (a + b) / 2 < s && s < b
@@ -16,7 +16,7 @@ module UploadHelper
       two = (b - a).to_f
       final = (one / two).to_f
       final **= 2
-      return 1 - 2 * final
+      return (1 - 2 * final).floor(3)
     end
 
     1 if s >= b
@@ -33,7 +33,7 @@ module UploadHelper
       two = (b - a).to_f
       final = (one / two).to_f
       final **= 2
-      return 2 * final
+      return (2 * final).floor(3)
     end
 
     if (a + b) / 2 < t && t < b
@@ -41,7 +41,7 @@ module UploadHelper
       two = (b - a).to_f
       final = (one / two).to_f
       final **= 2
-      return 1 - 2 * final
+      return (1 - 2 * final).floor(3)
     end
 
     1 if t >= b
@@ -54,5 +54,5 @@ module UploadHelper
   def least_hash_key(hash)
     hash.min_by { |_k, v| v }
   end
- 
+
 end

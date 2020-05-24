@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TestController < ApplicationController
   include UploadHelper
 
@@ -6,12 +8,10 @@ class TestController < ApplicationController
   end
 
   def calculate
-
-   ogo = test_params[:model].to_h
+    ogo = test_params[:model].to_h
     models = []
     result = []
     ogo.each do |x|
-      pp x[0] # we can find model by id
       model = Model.find_by_id x[0]
       f = {}
       res = []
@@ -39,38 +39,24 @@ class TestController < ApplicationController
 
   def result
     models = session[:models]
-    pp "sss"
-    pp models
     n = models.size
 
     e = []
-
 
     (1..n).each do |i|
       e << "e#{i}"
     end
 
-
     @model_for_second_step = models
 
     @model_for_third_step = models
 
-    # second step
-
     @second_step = @model_for_second_step.each { |item| item['e'] = second_step(item['e'], item['a'], item['b']) }
-
-    p '@second_step step'
-    p @second_step
 
     @third_step = @model_for_third_step.each do |item|
       item['e'] = third_step(item['e'], item['a'], item['b'])
       item['d'] = third_step(item['t'], item['a'], item['b'])
     end
-
-    p '@third_step step'
-    p @third_step
-
-    # four step
 
     @z = []
 
@@ -78,35 +64,27 @@ class TestController < ApplicationController
       array = []
       max = largest_hash_key(item.reject { |x| %i[b p a t].include?(x) })
       min = least_hash_key(item.reject { |x| %i[b p a t].include?(x) })
-        array << 1 - (item['d'] - item['e']).abs / [item['d'] - min[1], max[1] - item['d']].max
+      array << (1 - (item['d'] - item['e']).abs / [item['d'] - min[1], max[1] - item['d']].max).floor(3)
       @z << array
     end
-
-    p 'four step'
-    pp @z
-
-    # five step
 
     @w = []
     sum = @model_for_third_step.inject(0) { |sum, item| sum + item['p'] }
     @third_step.each do |item|
-      @w << item['p'] / sum.to_f
+      @w << (item['p'] / sum.to_f).floor(3)
     end
 
-    pp 'five step'
-    pp @w
     sum = 0
     n.times do |i|
-      sum += @z[i][0] * @w[0]
+      sum += (@z[i][0] * @w[0]).floor(3)
     end
 
     @max = sum
-    @winer = 'You'
+    @winer = 'Ви'
    end
 
-
-   def upload
-     n = 5
+  def upload
+    n = 5
     e = []
     models = 3
     (1..n).each do |i|
@@ -188,19 +166,12 @@ class TestController < ApplicationController
       }
     ]
 
-    # second step
-
     @second_step = @model_for_second_step.each { |item| e.each { |e| item[:"#{e}"] = second_step(item[:"#{e}"], item[:a], item[:b]) } }
 
     @third_step = @model_for_third_step.each do |item|
       e.each { |e| item[:"#{e}"] = third_step(item[:"#{e}"], item[:a], item[:b]) }
       item[:d] = third_step(item[:t], item[:a], item[:b])
     end
-
-    p '@third_step step'
-    p @third_step
-
-    # four step
 
     @z = []
 
@@ -209,46 +180,32 @@ class TestController < ApplicationController
       max = largest_hash_key(item.reject { |x| %i[b p a t].include?(x) })
       min = least_hash_key(item.reject { |x| %i[b p a t].include?(x) })
       e.each do  |e|
-        array << 1 - (item[:d] - item[:"#{e}"]).abs / [item[:d] - min[1], max[1] - item[:d]].max
+        array << (1 - (item[:d] - item[:"#{e}"]).abs / [item[:d] - min[1], max[1] - item[:d]].max).floor(3)
       end
       @z << array
     end
 
-    p 'four step'
-    pp @z
-
-    # five step
-
     @w = []
     sum = @model_for_third_step.inject(0) { |sum, item| sum + item[:p] }
     @third_step.each do |item|
-      @w << item[:p] / sum.to_f
+      @w << (item[:p] / sum.to_f).floor(3)
     end
 
-    pp 'five step'
-    pp @w
-    # six step
     @a = []
     n.times do |i|
       p i
-      @a << { "e#{i + 1}": @z[0][i] * @w[0] + @z[1][i] * @w[1] + @z[2][i] * @w[2] }
+      @a << { "e#{i + 1}": (@z[0][i] * @w[0] + @z[1][i] * @w[1] + @z[2][i] * @w[2]).floor(3) }
     end
-
-    pp 'Six step'
-
-    pp @a
-
-    # seven step
 
     @list = {}
     @a.each_with_index do |item, index|
       index += 1
-      @list[index] = {e: item[:"e#{index}"]}
+      @list[index] = { e: item[:"e#{index}"] }
     end
-    pp @list = @list.sort_by {|index,params|params[:e]}.reverse
+    pp @list = @list.sort_by { |_index, params| params[:e] }.reverse
     @max = @list.first.second[:e]
     @winer = @list.first.first
-   end
+  end
 
   private
 
