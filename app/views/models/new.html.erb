@@ -2,5 +2,9 @@
   <%= select_tag :questions, options_for_select((1..15).to_a)%>
 </div>
 <div id="form">
-  <%=render "form", model: @model%>
+  <%= simple_form_for @model,url: models_path, validate: true do |f| %>
+  <%=render "form", f: f%>
+  <%=f.button :submit, "Зберегти", class:"btn btn-success" %>
+<%end%>
+
 </div>

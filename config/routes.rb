@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'pages#index'
-  resources :models ,only:[:new,:create,:show,:index]
+  resources :models
   resources :test, only:[:index] do
     collection do
       get :result

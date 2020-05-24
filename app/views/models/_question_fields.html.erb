@@ -1,9 +1,14 @@
-<%= f.input :title, label: "Питання" %>
-<div class="m-4">
-
-  <%= f.simple_fields_for :variants do |v_f|%>
-  <%= render "variant_fields", f:v_f%>
-<%end%>
-<%= link_to_add_fields 'Add Question Variant', f, :variants %>
-</div>
-<%= f.input :_destroy, as: :boolean %>
+<fieldset>
+  <%= f.input :title, label: "Питання" %>
+  <div class="m-4">
+    <%= f.check_box :_destroy %>
+    <%= f.label :_destroy, "Видалити питання" %>
+      <%# link_to "Видалити питання", '#', class: "remove_fields" %>
+      <%= f.simple_fields_for :variants do |v_f|%>
+      <%= render "variant_fields", f:v_f%>
+    <%end%>
+    <hr>
+    <br>
+    <%= link_to_add_fields 'Додати варіант', f, :variants %>
+  </div>
+</fieldset>

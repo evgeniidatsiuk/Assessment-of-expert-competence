@@ -1,3 +1,7 @@
-<%= f.input :title, label: "Варіант"%>
-<%= f.input :value, label: "Значення"%>
-<%= f.input :_destroy, as: :boolean %>
+<fieldset>
+  <%= f.input :title, label: "Варіант"%>
+  <%= f.input :value, label: "Значення"%>
+  <%= f.check_box :_destroy %>
+  <%= f.label :_destroy, "Видалити варіант" %>
+  <%# link_to "Видалити варіант", '#', class: "remove_fields" %>
+</fieldset>
