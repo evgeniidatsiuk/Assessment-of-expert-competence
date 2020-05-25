@@ -7,6 +7,7 @@ class UploadController < ApplicationController
   def index
     e = []
     models = Setting.first.model_count
+    
     (1..@n).each do |i|
       e << "e#{i}"
     end
@@ -46,10 +47,6 @@ class UploadController < ApplicationController
       @z << array
     end
 
-    p 'four step'
-    pp @z
-
-    # five step
 
     @w = []
     sum = @model_for_third_step.inject(0) { |sum, item| sum + item[:p] }
@@ -57,8 +54,6 @@ class UploadController < ApplicationController
       @w << (item[:p] / sum.to_f).floor(3)
     end
 
-    pp 'five step'
-    pp @w
 
     @a = []
     sum = 0
@@ -66,12 +61,8 @@ class UploadController < ApplicationController
       models.times do |j|
         sum += (@z[j][i] * @w[j]).floor(3)
       end
-      @a << { "e#{i + 1}": sum }
+      @a << { "e#{i + 1}": (sum).floor(3) }
     end
-
-    pp @a
-
-    # seven step
 
     @list = {}
     @a.each_with_index do |item, index|

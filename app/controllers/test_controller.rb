@@ -41,17 +41,7 @@ class TestController < ApplicationController
     models = session[:models]
     n = models.size
 
-    e = []
-
-    (1..n).each do |i|
-      e << "e#{i}"
-    end
-
-    @model_for_second_step = models
-
     @model_for_third_step = models
-
-    @second_step = @model_for_second_step.each { |item| item['e'] = second_step(item['e'], item['a'], item['b']) }
 
     @third_step = @model_for_third_step.each do |item|
       item['e'] = third_step(item['e'], item['a'], item['b'])
@@ -64,7 +54,7 @@ class TestController < ApplicationController
       array = []
       max = largest_hash_key(item.reject { |x| %i[b p a t].include?(x) })
       min = least_hash_key(item.reject { |x| %i[b p a t].include?(x) })
-      array << (1 - (item['d'] - item['e']).abs / [item['d'] - min[1], max[1] - item['d']].max).floor(3)
+      array << (1 - ((item['d'] - item['e']).abs / [item['d'] - min[1], max[1] - item['d']].max)).floor(3)
       @z << array
     end
 
@@ -180,7 +170,7 @@ class TestController < ApplicationController
       max = largest_hash_key(item.reject { |x| %i[b p a t].include?(x) })
       min = least_hash_key(item.reject { |x| %i[b p a t].include?(x) })
       e.each do  |e|
-        array << (1 - (item[:d] - item[:"#{e}"]).abs / [item[:d] - min[1], max[1] - item[:d]].max).floor(3)
+        array << (1 - ((item[:d] - item[:"#{e}"]).abs / [item[:d] - min[1], max[1] - item[:d]].max)).floor(3)
       end
       @z << array
     end
