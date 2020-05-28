@@ -42,7 +42,7 @@ class UploadController < ApplicationController
       max = largest_hash_key(item.reject { |x| %i[b p a t].include?(x) })
       min = least_hash_key(item.reject { |x| %i[b p a t].include?(x) })
       e.each do  |e|
-        array << (1 - (item[:d] - item[:"#{e}"]).abs / [item[:d] - min[1], max[1] - item[:d]].max).floor(3)
+        array << (1 - (item[:d] - item[:"#{e}"]).abs / [item[:d] - min[1], max[1] - item[:d]].max).floor(4)
       end
       @z << array
     end
@@ -51,7 +51,7 @@ class UploadController < ApplicationController
     @w = []
     sum = @model_for_third_step.inject(0) { |sum, item| sum + item[:p] }
     @third_step.each do |item|
-      @w << (item[:p] / sum.to_f).floor(3)
+      @w << (item[:p] / sum.to_f).floor(4)
     end
 
 
@@ -59,9 +59,9 @@ class UploadController < ApplicationController
     @n.times do |i|
       sum = 0
       models.times do |j|
-        sum += (@z[j][i] * @w[j]).floor(3)
+        sum += (@z[j][i] * @w[j]).floor(4)
       end
-      @a << { "e#{i + 1}": (sum).floor(3) }
+      @a << { "e#{i + 1}": (sum).floor(4) }
     end
 
     @list = {}

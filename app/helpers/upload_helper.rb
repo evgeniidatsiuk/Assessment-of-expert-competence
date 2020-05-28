@@ -8,7 +8,7 @@ module UploadHelper
       two = (b - a).to_f
       final = (one / two).to_f
       final **= 2
-      return (2 * final).floor(3)
+      return (2 * final).floor(4)
     end
 
     if (a + b) / 2 < s && s < b
@@ -16,14 +16,13 @@ module UploadHelper
       two = (b - a).to_f
       final = (one / two).to_f
       final **= 2
-      return (1 - 2 * final).floor(3)
+      return (1 - 2 * final).floor(4)
     end
 
     1 if s >= b
   end
 
   def third_step(t = 0.0, a = 0.0, b = 0.0)
- p "t", t,a
  if t <= a
    return 0
  end
@@ -33,7 +32,7 @@ module UploadHelper
       two = (b - a).to_f
       final = (one / two).to_f
       final **= 2
-      return (2 * final).floor(3)
+      return (2 * final).floor(4)
     end
 
     if (a + b) / 2 < t && t < b
@@ -41,17 +40,19 @@ module UploadHelper
       two = (b - a).to_f
       final = (one / two).to_f
       final **= 2
-      return (1 - 2 * final).floor(3)
+      return (1 - 2 * final).floor(4)
     end
 
     1 if t >= b
   end
 
   def largest_hash_key(hash)
+    pp "has", hash
     hash.max_by { |_k, v| v }
   end
 
   def least_hash_key(hash)
+    pp "has", hash
     hash.min_by { |_k, v| v }
   end
 
