@@ -3,9 +3,6 @@
   <hr>
   <%= m.name %>
   <hr>
-    <%= m.a %>  < res && res <= <%= (m.a +  m.b ) / 2 %>
-    <br>
-  <%= (m.a +  m.b ) / 2 %> < res && s < <%= m.b %>
   <br>
     <% m.questions.each_with_index do |q,i| %>
     <br>
@@ -14,7 +11,7 @@
         <p class="lable"><%= q.title %></p>
       </div>
       <div class="col-12 col-sm-12 col-md-7 col-lg-7">
-        <%= f.select :"model[#{m_i+1}][question[#{i+1}]", options_for_select(q.variants.collect{ |u| [u.value, u.value] }) %>
+        <%= f.select :"model[#{m_i+1}][question[#{i+1}]", options_for_select(q.variants.collect{ |u| [u.title, u.value] }) %>
       </div>
       </div>
     <%end %>
