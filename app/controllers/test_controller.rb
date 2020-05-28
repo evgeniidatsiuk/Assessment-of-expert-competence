@@ -28,15 +28,15 @@ class TestController < ApplicationController
       models << f
     end
 
-    session[:models] = []
-    session[:models] = models
+    # session[:models] = []
+    # session[:models] = models
 
     current_user.update_attributes(result: models)
 
-    #set = Setting.last
-    #set.update_attribute(:experiment_count, set.experiment_count + 1 )
+    set = Setting.last
+    set.update_attribute(:experiment_count, set.experiment_count + 1 )
 
-    redirect_to result_test_index_path
+    redirect_to upload_index_path
   end
 
   def result
