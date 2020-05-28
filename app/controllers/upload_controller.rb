@@ -7,7 +7,7 @@ class UploadController < ApplicationController
   def index
     e = []
     models = Setting.first.model_count
-    
+
     (1..@n).each do |i|
       e << "e#{i}"
     end
@@ -56,8 +56,8 @@ class UploadController < ApplicationController
 
 
     @a = []
-    sum = 0
     @n.times do |i|
+      sum = 0
       models.times do |j|
         sum += (@z[j][i] * @w[j]).floor(3)
       end
