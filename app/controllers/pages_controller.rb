@@ -1,12 +1,7 @@
 class PagesController < ApplicationController
-  before_action :current_user, only: [:index]
 
   def index
-    if current_user.nil?
       @user = User.new
-    else
-      redirect_to test_index_path
-    end
   end
 
   def create

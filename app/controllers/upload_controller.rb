@@ -83,13 +83,10 @@ class UploadController < ApplicationController
 
   def check
     @users = User.where("result != '{}'").map(&:result)
-    @n = Setting.first.experiment_count
+    @n = @users.count
     m = @users.first.count
     m_count = Setting.first.model_count
-    if @n != @users.count
-      flash[:error] = "В налаштуваннях: #{@n}, а пройшло тест: #{@users.count}."
-      redirect_to setting_path
-    end
+    
     if m != m_count
       flash[:error] = "В налаштуваннях: #{m_count}, а доступних моделей: #{m}."
       redirect_to setting_path
