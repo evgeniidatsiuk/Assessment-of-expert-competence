@@ -14,6 +14,10 @@ Rails.application.routes.draw do
       post :upload
     end
   end
-  resource :setting, only: %i[show update]
+  resource :setting, only: %i[show update] do
+    collection do
+      post :reset
+    end
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -21,7 +21,10 @@
     <div class="col-12 col-sm-12 col-md-5 col-lg-5">
     </div>
     <div class="col-12 col-sm-12 col-md-7 col-lg-7">
-     <%= f.submit "Зберегти", class: "btn btn-primary" %>
+     <%= f.submit "Зберегти зміни", class: "btn btn-primary" %>
+     <br>
+     <hr>
+     <%= link_to "Очистити результати", reset_setting_path, method: :post, class: "btn btn-danger"  %>
    </div>
   </div>
 <%end%>

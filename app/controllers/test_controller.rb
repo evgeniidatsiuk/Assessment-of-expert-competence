@@ -28,15 +28,9 @@ class TestController < ApplicationController
       models << f
     end
 
-    # session[:models] = []
-    # session[:models] = models
-
     current_user.update_attributes(result: models)
-
-    set = Setting.last
-    set.update_attribute(:experiment_count, set.experiment_count + 1 )
-
-    redirect_to upload_index_path
+    flash[:success] = 'Дякуюємо! Згодом можна буде переглянути рейтинг як всі пройдуть тест!'
+    redirect_to root_path
   end
 
   def result

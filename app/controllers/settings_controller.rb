@@ -10,6 +10,12 @@ class SettingsController < ApplicationController
     render 'show'
   end
 
+  def reset
+    User.delete_all
+    flash[:success] = 'Рейтинг успішно очищено!'
+    redirect_to root_path
+  end
+
   private
 
   def setting
