@@ -80,6 +80,4 @@ test:
 #
 production:
   <<: *default
-  database: Assessment_of_expert_competence_production
-  username: Assessment_of_expert_competence
-  password: <%= ENV['ASSESSMENT_OF_EXPERT_COMPETENCE_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
